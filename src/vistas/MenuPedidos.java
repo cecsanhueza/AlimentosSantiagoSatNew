@@ -761,7 +761,7 @@ public final class MenuPedidos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPedTotActionPerformed
 
     private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
-        Grafico.Graficar(fechaActual);
+     //   Grafico.Graficar(fechaActual);
         
     }//GEN-LAST:event_btnGraficarActionPerformed
 
