@@ -54,6 +54,7 @@ public class Login extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
 
         dialogo.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -104,6 +105,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         btnLogin.setText("Iniciar Sesión");
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -114,6 +116,14 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Correo Electrónico");
 
+        btnSalir.setText("Salir");
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -123,14 +133,13 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(162, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(185, 185, 185))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnLogin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +154,9 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 550, 500));
@@ -154,25 +165,48 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        validar();
-        DatosConexion con = new DatosConexion();
-       
-        //(da.login(txtUser.getText(), txtPass.getText()) > 0)
-     
-        if (con.login(txtCorreo.getText(), txtPassword.getText())> 0) {
-              
-                JOptionPane.showMessageDialog(null, "Bienvenido al Sistema de Ventas " + txtCorreo.getText());
-
-                MenuPedidos menu = new MenuPedidos();
-                menu.setVisible(true);
-                this.setVisible(false);
-            }
-            
-
-         else {
-            JOptionPane.showMessageDialog(null, "USUARIO Y/O CONTRASEÑA INCORRECTAS, VERIFIQUE QUE LA CUENTA UTILIZADA SEA DE ADMIN ", " Error de conexión", JOptionPane.ERROR_MESSAGE);
-            
+    if(txtCorreo.getText().length()==0 || txtCorreo.getText().length()>50){
+            JOptionPane.showMessageDialog(this,"Debes ingresar un email.","Sistema",JOptionPane.WARNING_MESSAGE);
+            txtCorreo.requestFocus();
+            return;
         }
+        if(txtPassword.getText().length()==0 || txtPassword.getText().length()>64){
+            JOptionPane.showMessageDialog(this,"Debes ingresar una clave de acceso.","Sistema",JOptionPane.WARNING_MESSAGE);
+            txtCorreo.requestFocus();
+            return;
+        }
+        
+        Administrador ad=new Administrador();
+        String resp=control.login(txtCorreo.getText(), txtPassword.getText());
+        if (resp.equals("1")){
+            this.dispose();
+            MenuPedidos menu = new MenuPedidos();
+            menu.toFront();
+            menu.setVisible(true);
+        }else if(resp.equals("2")){
+            JOptionPane.showMessageDialog(this,"Usuario no tiene acceso.","Sistema",JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this,"Los datos de acceso son incorrectos.","Sistema",JOptionPane.ERROR_MESSAGE);
+        }
+//        validar();
+//        DatosConexion con = new DatosConexion();
+//       
+//        //(da.login(txtUser.getText(), txtPass.getText()) > 0)
+//     
+//        if (con.login(txtCorreo.getText(), txtPassword.getText())> 0) {
+//              
+//                JOptionPane.showMessageDialog(null, "Bienvenido al Sistema de Ventas " + txtCorreo.getText());
+//
+//                MenuPedidos menu = new MenuPedidos();
+//                menu.setVisible(true);
+//                this.setVisible(false);
+//            }
+//            
+//
+//         else {
+//            JOptionPane.showMessageDialog(null, "USUARIO Y/O CONTRASEÑA INCORRECTAS, VERIFIQUE QUE LA CUENTA UTILIZADA SEA DE ADMIN ", " Error de conexión", JOptionPane.ERROR_MESSAGE);
+//            
+//        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void dialogoWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dialogoWindowClosing
@@ -182,6 +216,10 @@ public class Login extends javax.swing.JFrame {
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,6 +258,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JDialog dialogo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
