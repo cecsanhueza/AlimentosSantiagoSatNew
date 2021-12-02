@@ -19,6 +19,18 @@ public class Administrador {
     public Administrador() {
     }
 
+    public Administrador(String rut_adm, String nombre_adm, String apat_adm, String amat_adm, String email_admin, int fono_admin, int restaurant_id_restaurant) {
+        this.rut_adm = rut_adm;
+        this.nombre_adm = nombre_adm;
+        this.apat_adm = apat_adm;
+        this.amat_adm = amat_adm;
+        this.email_admin = email_admin;
+        this.fono_admin = fono_admin;
+        this.restaurant_id_restaurant = restaurant_id_restaurant;
+    }
+    
+    
+
     public Administrador(String rut_adm, String nombre_adm, String apat_adm, String amat_adm, String email_admin, int fono_admin, String contraseña1, String contraseña2, int restaurant_id_restaurant) {
         this.rut_adm = rut_adm;
         this.nombre_adm = nombre_adm;
