@@ -18,6 +18,7 @@ public class Login extends javax.swing.JFrame {
   
     public Login() {
         initComponents();
+        this.setTitle("Acceso al Sistema.");
         this.setLocationRelativeTo(null);
         
 //        txtCorreo.setText("admin@admin.com");
@@ -25,17 +26,17 @@ public class Login extends javax.swing.JFrame {
     }
 
 
-    public void validar(){
-        String email_admin = txtCorreo.getText();
-        String contraseña1 = String.valueOf(txtPassword.getPassword());
-        if(!"".equals(email_admin) || !"".equals(contraseña1)) {
-            
-            MenuPedidos men = new MenuPedidos(ad);
-                men.setVisible(true);
-                dispose();
-            
-    }
-    }
+//    public void validar(){
+//        String email_admin = txtCorreo.getText();
+//        String contraseña1 = String.valueOf(txtPassword.getPassword());
+//        if(!"".equals(email_admin) || !"".equals(contraseña1)) {
+//            
+//            MenuPedidos men = new MenuPedidos(ad);
+//                men.setVisible(true);
+//                dispose();
+//            
+//    }
+   // }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,6 +56,7 @@ public class Login extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         dialogo.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -77,7 +79,7 @@ public class Login extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(0, 102, 102));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -124,6 +126,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -135,16 +139,21 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
+                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
                 .addContainerGap(161, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(146, 146, 146))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(243, 243, 243)
+                .addGap(43, 43, 43)
+                .addComponent(jLabel3)
+                .addGap(72, 72, 72)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -177,17 +186,7 @@ public class Login extends javax.swing.JFrame {
         }
         
         Administrador ad=new Administrador();
-        String resp=control.login(txtCorreo.getText(), txtPassword.getText());
-        if (resp.equals("1")){
-            this.dispose();
-            MenuPedidos menu = new MenuPedidos();
-            menu.toFront();
-            menu.setVisible(true);
-        }else if(resp.equals("2")){
-            JOptionPane.showMessageDialog(this,"Usuario no tiene acceso.","Sistema",JOptionPane.ERROR_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(this,"Los datos de acceso son incorrectos.","Sistema",JOptionPane.ERROR_MESSAGE);
-        }
+    
 //        validar();
 //        DatosConexion con = new DatosConexion();
 //       
@@ -262,6 +261,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JDialog dialogo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField txtCorreo;
