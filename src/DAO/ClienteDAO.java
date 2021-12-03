@@ -5,7 +5,7 @@ import conexion.Conexion;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
-import Modelo.Cliente;
+import modelo.Cliente;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -25,19 +25,19 @@ public class ClienteDAO {
     public ClienteDAO(){
     }
     public boolean guardarCliente(Cliente cli) throws SQLException {
-        //revisar si se guarda o no el administrador.
+        //revisar si se guarda o NO EL CLIENTE
         boolean prueba = false;
         try {
             this.con = new Conexion().obtenerConexion();
-            String query = "Insert into CLIENTE values(?,?,?,?,?,?,?,?)";
+            String query = "INSERT into CLIENTE values(?,?,?,?,?,?,?,?)";
             CallableStatement cstmt = con.prepareCall(query);
-            cstmt.setInt(1, cli.getId_cliente());
-            cstmt.setString(2, cli.getNombre_cli());
-            cstmt.setString(3, cli.getApaterno_cli());
-            cstmt.setString(4, cli.getAmaterno_cli());
-            cstmt.setInt(5, cli.getFono_cli());
-            cstmt.setString(6, cli.getEmail_cli());
-            cstmt.setInt(7, cli.getSaldo_cli());
+            cstmt.setInt(1, cli.getID_CLIENTE());
+            cstmt.setString(2, cli.getNOMBRE_CLI());
+            cstmt.setString(3, cli.getAPATERNO_CLI());
+            cstmt.setString(4, cli.getAMATERNO_CLI());
+            cstmt.setInt(5, cli.getFONO_CLI());
+            cstmt.setString(6, cli.getEMAIL_CLI());
+            cstmt.setInt(7, cli.getSALDO_CLI());
 
             int control = cstmt.executeUpdate();
             if (control > 0) {
@@ -60,13 +60,13 @@ public List ListarCliente(){
 
             while (rs.next()){
                 Cliente cli = new Cliente();
-                cli.setId_cliente(rs.getInt("id_cliente"));
-                cli.setNombre_cli(rs.getString("nombre"));
-                cli.setApaterno_cli(rs.getString("apaterno"));
-                cli.setAmaterno_cli(rs.getString("amaterno"));
-                cli.setFono_cli(rs.getInt("fono_cli"));
-                cli.setEmail_cli(rs.getString("email_cli"));
-                cli.setSaldo_cli(rs.getInt("saldo"));
+                cli.setID_CLIENTE(rs.getInt("id_cliente"));
+                cli.setNOMBRE_CLI(rs.getString("nombre"));
+                cli.setAPATERNO_CLI(rs.getString("apaterno"));
+                cli.setAMATERNO_CLI(rs.getString("amaterno"));
+                cli.setFONO_CLI(rs.getInt("fono_cli"));
+                cli.setEMAIL_CLI(rs.getString("email_cli"));
+                cli.setSALDO_CLI(rs.getInt("saldo"));
                 Listacli.add(cli);
             }
         }catch(SQLException e){
