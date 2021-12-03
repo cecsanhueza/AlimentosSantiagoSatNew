@@ -51,7 +51,7 @@
     <Container class="javax.swing.JPanel" name="jPanel3">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+          <Color blue="66" green="66" red="0" type="rgb"/>
         </Property>
       </Properties>
       <Constraints>
@@ -96,11 +96,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="btnSalir" pref="160" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="btnLogin" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtCorreo" alignment="0" pref="160" max="32767" attributes="0"/>
-                          <Component id="txtPassword" alignment="0" pref="160" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btnLogin" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtCorreo" alignment="0" pref="160" max="32767" attributes="0"/>
+                      <Component id="txtPassword" alignment="0" pref="160" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="161" max="32767" attributes="0"/>
               </Group>
