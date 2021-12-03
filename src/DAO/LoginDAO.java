@@ -40,7 +40,7 @@ public class LoginDAO {
                 a.setFono_admin(rs.getInt("FONO_ADMIN"));
                 a.setContraseña1(rs.getNString("CONTRASEÑA1"));
                 a.setContraseña2(rs.getNString("CONTRASEÑA2"));
-                a.setRestaurant_id_restaurant(rs.getInt("RESTAURANT_ID_RESTAURANT"));
+                a.setRestaurant_id_restaurante(rs.getInt("RESTAURANT_ID_RESTAURANT"));
                 
             }
         } catch (SQLException e) {
