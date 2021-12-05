@@ -26,6 +26,8 @@ import reportes.Grafico;
  * @author cecsanhueza
  */
 public final class MenuPedidos extends javax.swing.JFrame {
+    Date fechaVenta = new Date();
+    String fechaActual = new SimpleDateFormat("dd/MM/yyyy").format(fechaVenta);
     Administrador ad = new Administrador();
     LoginDAO login = new LoginDAO();
     
@@ -38,7 +40,7 @@ public final class MenuPedidos extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         mostrarPedidos();
-//        pdf();
+
         
    }
     
@@ -140,7 +142,10 @@ public final class MenuPedidos extends javax.swing.JFrame {
         }
     }
     void contarPedidosTotales(){
-
+        String cliente_id;
+        int cantidad;
+      //  v.setFecha(fechaActual);
+        
             
         try {
             Connection con = conec.obtenerConexion();
@@ -167,8 +172,13 @@ public final class MenuPedidos extends javax.swing.JFrame {
         btnEntregados = new javax.swing.JButton();
         btnMenuVentas = new javax.swing.JButton();
         btnPruebas = new javax.swing.JButton();
+        btnProveedor = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jTabbedPane4 = new javax.swing.JTabbedPane();
+        jTabbedPane5 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListarPedidos = new javax.swing.JTable();
         btnGraficar = new javax.swing.JButton();
@@ -211,7 +221,7 @@ public final class MenuPedidos extends javax.swing.JFrame {
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salir.png"))); // NOI18N
         btnSalir.setText("Salir");
-        btnSalir.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        btnSalir.setBorder(null);
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,12 +245,14 @@ public final class MenuPedidos extends javax.swing.JFrame {
         });
 
         btnPruebas.setText("Listar Clientes");
-        btnPruebas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnPruebas.setBorder(null);
         btnPruebas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPruebasActionPerformed(evt);
             }
         });
+
+        btnProveedor.setText("Proveedores");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -251,9 +263,10 @@ public final class MenuPedidos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnMenuVentas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEntregados, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                    .addComponent(btnEntregados, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPruebas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnPruebas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -267,7 +280,9 @@ public final class MenuPedidos extends javax.swing.JFrame {
                 .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEntregados, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -275,6 +290,11 @@ public final class MenuPedidos extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 650));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTabbedPane1.addTab("Listar Clientes", jTabbedPane2);
+        jTabbedPane1.addTab("Listar Pedidos", jTabbedPane3);
+        jTabbedPane1.addTab("Entregados", jTabbedPane4);
+        jTabbedPane1.addTab("Proveedores", jTabbedPane5);
 
         jListarPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -296,6 +316,7 @@ public final class MenuPedidos extends javax.swing.JFrame {
 
         btnGraficar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/consultas.png"))); // NOI18N
         btnGraficar.setText("Consulta");
+        btnGraficar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGraficar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGraficarActionPerformed(evt);
@@ -324,16 +345,16 @@ public final class MenuPedidos extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Midate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnGraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
+                    .addComponent(btnGraficar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 1290, 510));
@@ -755,7 +776,7 @@ public final class MenuPedidos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPedTotActionPerformed
 
     private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
-     //   Grafico.Graficar(fechaActual);
+        Grafico.Graficar(fechaActual);
         
     }//GEN-LAST:event_btnGraficarActionPerformed
 
@@ -860,6 +881,7 @@ public final class MenuPedidos extends javax.swing.JFrame {
     private javax.swing.JButton btnGraficar;
     private javax.swing.JButton btnMenuVentas;
     private javax.swing.JButton btnPendientes;
+    private javax.swing.JButton btnProveedor;
     private javax.swing.JButton btnPruebas;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVentas;
@@ -883,6 +905,10 @@ public final class MenuPedidos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTabbedPane jTabbedPane4;
+    private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTextField txtPedTot;
     // End of variables declaration//GEN-END:variables
 }
