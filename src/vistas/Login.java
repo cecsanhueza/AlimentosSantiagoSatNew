@@ -205,13 +205,7 @@ public class Login extends javax.swing.JFrame {
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
 //       
-//        if (txtCorreo.getText().equals("admin") && txtPassword.getText().equals("admin")){
-//            setVisible(false);
-//            new MenuPedidos().setVisible(true);
-//            
-//        }else {
-//            JOptionPane.showMessageDialog(null, "Correo o Contraseña incorrectos.");
-//        } 
+
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -219,7 +213,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void chkMostrarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMostrarPassActionPerformed
-        // TODO add your handling code here:
+       
         if (chkMostrarPass.isSelected()) {
             txtPassword.setEchoChar((char)0);
         }else 
