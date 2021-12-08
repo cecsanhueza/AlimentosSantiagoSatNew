@@ -205,7 +205,7 @@ public final class MenuPedidos extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
         btnVentas.setText("Listar Pedidos");
-        btnVentas.setBorder(null);
+        btnVentas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,7 +215,7 @@ public final class MenuPedidos extends javax.swing.JFrame {
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salir.png"))); // NOI18N
         btnSalir.setText("Salir");
-        btnSalir.setBorder(null);
+        btnSalir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,7 +224,8 @@ public final class MenuPedidos extends javax.swing.JFrame {
         });
 
         btnEntregados.setText("Pedidos Entregados");
-        btnEntregados.setBorder(null);
+        btnEntregados.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEntregados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEntregados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntregadosActionPerformed(evt);
@@ -232,6 +233,8 @@ public final class MenuPedidos extends javax.swing.JFrame {
         });
 
         btnMenuVentas.setText("Ventas");
+        btnMenuVentas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnMenuVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenuVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuVentasActionPerformed(evt);
@@ -239,7 +242,8 @@ public final class MenuPedidos extends javax.swing.JFrame {
         });
 
         btnPruebas.setText("Listar Clientes");
-        btnPruebas.setBorder(null);
+        btnPruebas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnPruebas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPruebas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPruebasActionPerformed(evt);
@@ -247,6 +251,7 @@ public final class MenuPedidos extends javax.swing.JFrame {
         });
 
         btnProveedor.setText("Proveedores");
+        btnProveedor.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
