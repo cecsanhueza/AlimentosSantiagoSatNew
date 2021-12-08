@@ -20,62 +20,25 @@ public class Login extends javax.swing.JFrame {
     Administrador ad = new Administrador();
     LoginDAO login = new LoginDAO();
     
-    private Timer tiempo;
-    int cont;
-    public final static int TWO_SECOND=2;
+    
+    
   
     public Login() {
         initComponents();
-        this.setTitle("Iniciar Sesión.");
         this.setLocationRelativeTo(null);
-        progressbar.setVisible(false);
+        
         
 //        txtCorreo.setText("admin@admin.com");
 //        txtPassword.setText("admin");
     }
 
 
-    public void validar(){
-        String email_admin = txtCorreo.getText();
-        String contraseña1 = String.valueOf(txtPassword.getPassword());
-        
-        if((email_admin.equals("admin")) && (contraseña1.compareTo("admin")==0)) {
-            
-            progressbar.setVisible(true);
-            cont=-1;
-            progressbar.setValue(0);
-            progressbar.setStringPainted(true);
-            tiempo=new Timer(TWO_SECOND, new TimerListener());
-            tiempo.start();
-            
-            if (progressbar.getValue()==100) {
-                this.dispose();
-                
-            }   
-         }else {
-            JOptionPane.showMessageDialog(null, "Error.");
-            txtCorreo.setText("");
-            txtPassword.setText(null);
-        }
-    }
+  
     
     
     
     
-    public class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-           
-            cont++;
-            progressbar.setValue(cont);
-            if (cont==100) {
-                tiempo.stop();
-                
-            MenuPedidos men = new MenuPedidos(ad);
-            men.setVisible(true);
-            
-            }
-        }
-    }
+
 
     
     @SuppressWarnings("unchecked")
@@ -92,7 +55,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        progressbar = new javax.swing.JProgressBar();
+        chkMostrarPass = new javax.swing.JCheckBox();
 
         dialogo.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -113,6 +76,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 102));
@@ -164,9 +128,11 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
 
-        progressbar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                progressbarKeyPressed(evt);
+        chkMostrarPass.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        chkMostrarPass.setText("Mostrar Contraseña");
+        chkMostrarPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkMostrarPassActionPerformed(evt);
             }
         });
 
@@ -175,39 +141,45 @@ public class Login extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
-                .addContainerGap(133, Short.MAX_VALUE))
-            .addComponent(progressbar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(230, 230, 230)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                .addComponent(chkMostrarPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(62, 62, 62)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(chkMostrarPass, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(progressbar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 550, 500));
@@ -216,7 +188,15 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        validar();
+               
+        if (txtCorreo.getText().equals("admin@admin.com") && txtPassword.getText().equals("admin")){
+            setVisible(false);
+            new MenuPedidos().setVisible(true);
+            
+        }else {
+            JOptionPane.showMessageDialog(null, "Correo o Contraseña incorrectos.");
+        } 
+       
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void dialogoWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dialogoWindowClosing
@@ -224,18 +204,28 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_dialogoWindowClosing
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
-        // TODO add your handling code here:
+//       
+//        if (txtCorreo.getText().equals("admin") && txtPassword.getText().equals("admin")){
+//            setVisible(false);
+//            new MenuPedidos().setVisible(true);
+//            
+//        }else {
+//            JOptionPane.showMessageDialog(null, "Correo o Contraseña incorrectos.");
+//        } 
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void progressbarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_progressbarKeyPressed
-        if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
-            validar();
-        }
-    }//GEN-LAST:event_progressbarKeyPressed
+    private void chkMostrarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMostrarPassActionPerformed
+        // TODO add your handling code here:
+        if (chkMostrarPass.isSelected()) {
+            txtPassword.setEchoChar((char)0);
+        }else 
+            txtPassword.setEchoChar('*');
+        
+    }//GEN-LAST:event_chkMostrarPassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,13 +265,13 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JCheckBox chkMostrarPass;
     private javax.swing.JDialog dialogo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JProgressBar progressbar;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
