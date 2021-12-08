@@ -5,6 +5,14 @@
  */
 package vistas;
 
+import conexion.Conexion;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author 56979
@@ -17,7 +25,49 @@ public class Proveedores extends javax.swing.JFrame {
     public Proveedores() {
         initComponents();
         this.setLocationRelativeTo(null);
+        mostrarProveedores();
     }
+    
+    //tablaProveedores
+            
+            
+        Conexion conec = new Conexion();
+        DefaultTableModel tabla = new DefaultTableModel();
+            
+        
+        
+    void mostrarProveedores(){
+        tabla.addColumn("ID Proveedor");
+        tabla.addColumn("Nombre Proveedor");
+        tabla.addColumn("Rol Local");
+        tabla.addColumn("Celular");
+        tabla.addColumn("Descripcion");
+        
+        try{
+            Connection con = conec.obtenerConexion();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select id_proveedor, nom_proveedor, rol_local, celular, descripcion from proveedor");
+            
+            String datos[] = new String[5];
+            
+            while(rs.next()){
+                
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                datos[4] = rs.getString(5);
+
+                
+                tabla.addRow(datos);
+            }
+            tablaProveedores.setModel(tabla);
+                    
+                    
+        }catch (SQLException ex){
+            java.util.logging.Logger.getLogger(Proveedores.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,17 +80,36 @@ public class Proveedores extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnVolver = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaProveedores = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1366, 768));
         setUndecorated(true);
 
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+
+        btnVolver.setBackground(new java.awt.Color(255, 255, 255));
         btnVolver.setText("Volver");
+        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
             }
         });
+
+        tablaProveedores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tablaProveedores);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setText("Listado Proveedores");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -48,13 +117,23 @@ public class Proveedores extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(637, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(263, 263, 263))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(531, Short.MAX_VALUE)
+                .addContainerGap(53, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
                 .addComponent(btnVolver)
                 .addContainerGap())
         );
@@ -63,9 +142,7 @@ public class Proveedores extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,6 +193,9 @@ public class Proveedores extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton btnVolver;
+    javax.swing.JLabel jLabel1;
     javax.swing.JPanel jPanel1;
+    javax.swing.JScrollPane jScrollPane1;
+    javax.swing.JTable tablaProveedores;
     // End of variables declaration//GEN-END:variables
 }
