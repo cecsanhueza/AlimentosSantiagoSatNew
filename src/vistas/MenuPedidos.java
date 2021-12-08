@@ -747,7 +747,9 @@ public final class MenuPedidos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPedTotActionPerformed
 
     private void btnProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedorActionPerformed
-        // TODO add your handling code here:
+        Proveedores prove = new Proveedores();
+        prove.setVisible(true);
+        
         
     }//GEN-LAST:event_btnProveedorActionPerformed
 
