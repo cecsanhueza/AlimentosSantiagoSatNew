@@ -199,6 +199,7 @@ public final class MenuPedidos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
         setForeground(new java.awt.Color(204, 255, 255));
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
@@ -246,6 +247,12 @@ public final class MenuPedidos extends javax.swing.JFrame {
         });
 
         btnProveedor.setText("Proveedores");
+        btnProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProveedorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -738,6 +745,11 @@ public final class MenuPedidos extends javax.swing.JFrame {
     private void txtPedTotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPedTotActionPerformed
         contarPedidosTotales();
     }//GEN-LAST:event_txtPedTotActionPerformed
+
+    private void btnProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedorActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnProveedorActionPerformed
 
     
     //generar pdf
