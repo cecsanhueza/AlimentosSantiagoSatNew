@@ -59,6 +59,7 @@ public class Ventas extends javax.swing.JFrame {
         btnContarClientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
