@@ -90,7 +90,9 @@ public class Proveedores extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
         btnVolver.setBackground(new java.awt.Color(255, 255, 255));
-        btnVolver.setText("Volver");
+        btnVolver.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/deshacer-alt.png"))); // NOI18N
+        btnVolver.setText("   Volver");
         btnVolver.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -139,8 +141,8 @@ public class Proveedores extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(btnVolver)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
