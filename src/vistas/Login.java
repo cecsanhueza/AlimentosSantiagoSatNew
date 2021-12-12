@@ -87,7 +87,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnLogin.setText("Iniciar Sesión");
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
+        btnLogin.setText("  Iniciar Sesión");
         btnLogin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +102,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("Correo Electrónico");
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salir.png"))); // NOI18N
-        btnSalir.setText("Salir");
+        btnSalir.setText("    Salir");
         btnSalir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
